@@ -1,6 +1,5 @@
-[18:28] Hugo Poggetti
 name: Chocolatine
- 
+
 on:
 
   push:
@@ -8,13 +7,13 @@ on:
     branches-ignore:
 
       - 'ga-ignore-**'
- 
+
   pull_request:
 
     branches-ignore:
 
       - 'ga-ignore-**'
- 
+
 jobs:
 
   check_coding_style:
@@ -30,11 +29,11 @@ jobs:
       - name: Checkout Repository
 
         uses: actions/checkout@v4
- 
+
       - name: coding blob
 
         run: check.sh $(pwd) $(pwd)
- 
+
       - name: Run Coding Style Checker
 
         run: |
@@ -60,7 +59,7 @@ jobs:
             exit 1
 
           fi
- 
+
   check_program_compilation:
 
     name: Check Program Compilation
@@ -76,15 +75,15 @@ jobs:
       - name: Checkout Repository
 
         uses: actions/checkout@v4
- 
+
       - name: Launch Make
 
         run: make
- 
+
       - name: Clean Up
 
         run: make clean
- 
+
       - name: Verify Executables
 
         run: |
@@ -102,8 +101,8 @@ jobs:
             done
 
           BOB=$OIFS
- 
- 
+
+
   run_tests:
 
     name: Run Tests
@@ -119,13 +118,13 @@ jobs:
       - name: Checkout Repository
 
         uses: actions/checkout@v4
- 
+
       - name: Run Make Tests
 
         run: make tests_run
 
         working-directory: ${{github.workspace}}
- 
+
   Setup_SSH:
 
     runs-on: ubuntu-latest
@@ -139,7 +138,7 @@ jobs:
         with:
 
           ssh-private-key: ${{secrets.GIT_SSH_PRIVATE_KEY}}
- 
+
   push_to_mirror:
 
     runs-on: ubuntu-latest
